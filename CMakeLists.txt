@@ -52,11 +52,7 @@ find_package(MHD MODULE REQUIRED)
 set(HTTPMOCKSERVER_LIBRARIES httpmockserver ${MHD_LIBRARIES} CACHE INTERNAL "")
 set(HTTPMOCKSERVER_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include CACHE INTERNAL "")
 
-add_subdirectory(external)
 add_subdirectory(src)
-
-enable_testing()
-add_subdirectory(test)
 
 install(DIRECTORY ${HTTPMOCKSERVER_INCLUDE_DIRS}/httpmockserver
         DESTINATION include FILES_MATCHING PATTERN "*.h")
@@ -66,3 +62,9 @@ set(prefix "${CMAKE_INSTALL_PREFIX}")
 configure_file("libhttpmockserver.pc.in" "libhttpmockserver.pc" @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libhttpmockserver.pc DESTINATION lib/pkgconfig)
 
+option(BUILD_TESTS "Build tests")
+if(BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(external)
+  add_subdirectory(test)
+endif()
