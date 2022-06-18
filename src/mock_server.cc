@@ -135,8 +135,7 @@ template <typename T>
 struct KeyValueIteratorTrait {
     static const MHD_ValueKind arg_kind
         = static_cast<MHD_ValueKind>(
-          MHD_RESPONSE_HEADER_KIND
-        | MHD_HEADER_KIND
+          MHD_HEADER_KIND
         | MHD_COOKIE_KIND
         | MHD_POSTDATA_KIND
         | MHD_GET_ARGUMENT_KIND
